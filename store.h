@@ -5,6 +5,7 @@
 #ifndef STORE_H
 #define STORE_H
 
+// Good coordination hq
 class Store
 {
 private:

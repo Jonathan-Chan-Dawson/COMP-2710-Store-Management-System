@@ -21,6 +21,7 @@ int main()
 
 	// import from text files
 	ifstream inFile("credit_card.txt");
+	ifstream outFile("credit_card.txt"); // ?
 
 	// add to store and other variables
 	Store store1 = Store();

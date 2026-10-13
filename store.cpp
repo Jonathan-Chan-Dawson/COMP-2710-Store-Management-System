@@ -2,6 +2,8 @@
 // The Store Stores Customers and Products, and Manages Transactions
 #include "store.h"
 
+using namespace std;
+
 Store::Store()
 {
 }
@@ -116,4 +118,80 @@ bool Store::make_purchase(Person person, product product, int index)
 {
   get_product(index);
   return person.person_credit_card().make_purchase(product.price);
+}
+
+// returns a string listing all products associated
+// with this store.
+std::string Store::product_info()
+{
+  std::string str = "\nPRODUCT INFO: \n";
+  for (int i = 0; i < num_products_; i++)
+  {
+    std::string str_temp = get_product(i).description;
+    str += "\n\t" + str_temp;
+  }
+  str += "\n";
+  return str;
+}
+
+// returns a string listing all transactions associated
+// with this store
+string Store::transaction_info()
+{
+  std::string str = "\nTRANSACTIONS INFO: \n";
+  for (int i = 0; i < num_transactions_; i++)
+  {
+    std::string str_temp = get_transaction(i).transaction_info();
+    str += "\n\t" + str_temp;
+  }
+  str += "\n";
+  return str;
+}
+
+string Store::customer_info()
+{
+  std::string str = "\nCUSTOMERS INFO: \n";
+  for (int i = 0; i < num_customers_; i++)
+  {
+    std::string str_temp = get_transaction(i).transaction_info();
+    str += "\n\t" + str_temp;
+  }
+  str += "\n";
+  return str;
+}
+
+// returns a string listing all information about this
+// store (transactions and products)
+string Store::store_info()
+{
+  std::string str = "\n~~~~~~ FULL STORE INFO: ~~~~~~~\n";
+  return product_info() + transaction_info() + customer_info();
+}
+
+// searches through the transactions_[] and returns a
+// string representing all transactions that belong to
+// a specific customer.
+string Store::purchase_history(Person customer)
+{
+  std::string str = "Transaction History of Customer " + customer.name() + ": ";
+
+  for (int i = 0; i < num_transactions_; i++)
+  {
+    if (transactions_[i].customer.name() == customer.name())
+      str += transactions_[i].transaction_info() + ", ";
+  }
+  str.erase(str.length() - 2);
+  return str; // no customer found
+}
+
+// given a customer, returns the index in the customer_[]
+// where that customer is located >(by name)
+int Store::find_customer(Person customer)
+{
+  for (int i = 0; i < num_customers_; i++)
+  {
+    if (customers_[i].name() == customer.name())
+      return i;
+  }
+  return -1; // no customer found
 }
