@@ -31,11 +31,12 @@ int Store::num_products()
 }
 
 // get set number transactions
-void Store::num_products(int transaction_count)
+void Store::num_transactions(int transaction_count)
 {
   if (transaction_count >= 0 && transaction_count <= 100)
     num_transactions_ = transaction_count;
 }
+
 int Store::num_transactions()
 {
   return num_transactions_;
@@ -85,6 +86,7 @@ bool Store::add_product(product item)
   else
   {
     products_[num_products_] = item;
+    num_products(num_products_ + 1);
     return true;
   }
 }
@@ -104,6 +106,7 @@ bool Store::add_transaction(transaction transaction_item)
   else
   {
     transactions_[num_transactions_] = transaction_item;
+    num_transactions(num_transactions_ + 1);
     return true;
   }
 }
@@ -114,10 +117,24 @@ transaction Store::get_transaction(int index)
 }
 
 // is the int the product # or cash? we un known the int.
-bool Store::make_purchase(Person person, product product, int index)
+// needs to add a transaction
+// adds a person if not already added
+bool Store::make_purchase(Person person, product product, int quantity)
 {
-  get_product(index);
-  return person.person_credit_card().make_purchase(product.price);
+  bool purchase_success = person.person_credit_card().make_purchase(product.price * quantity);
+  if (purchase_success)
+  {
+    transaction new_transaction;
+    new_transaction.customer = person;
+    new_transaction.purchased_item = product;
+    new_transaction.quantity = quantity;
+    new_transaction.transaction_number = num_transactions_;
+    add_transaction(new_transaction);
+
+    if (!update_customer(find_customer(person), person))
+      add_customer(person);
+  }
+  return purchase_success;
 }
 
 // returns a string listing all products associated
