@@ -1,8 +1,14 @@
 // code for product struct here
-// product info string
 #include "product.h"
+#include <sstream>
+#include <iomanip>
 
 std::string product::product_info()
 {
-  return "PRODUCT Name: " + name + " | Description: " + description + " | Price: " + std::to_string(price);
-};
+	std::ostringstream out;
+	out << std::fixed << std::setprecision(2);
+	out << "Name: " << name << "\n"
+    	<< "Description: " << description << "\n"
+    	<< "Price: $" << price << "\n";
+	return out.str();
+}
