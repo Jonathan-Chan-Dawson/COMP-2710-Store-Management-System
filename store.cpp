@@ -198,7 +198,7 @@ string Store::purchase_history(Person customer)
       str += transactions_[i].transaction_info() + ", ";
   }
   str.erase(str.length() - 2);
-  return str; // no customer found
+  return str; // <= no customer found
 }
 
 // given a customer, returns the index in the customer_[]
@@ -210,5 +210,5 @@ int Store::find_customer(Person customer)
     if (customers_[i].name() == customer.name())
       return i;
   }
-  return -1; // no customer found
+  return -1; // <= no customer found
 }

@@ -14,13 +14,22 @@ using std::cout;
 using std::endl;
 using std::getline;
 using std::ifstream;
-using std::ofstream;
 
 int main()
 {
 
 	// import from text files
 	ifstream inFile("credit_card.txt");
+	if (!inFile)
+	{
+		cout << "Error: In-File is Not Available!" << endl;
+		return -1;
+	}
+	// TODO: Finish Adding the Products. This may just be wrong, lmk if i did it wrong. or right. 1:28 PM eastern time.
+	std::string line;
+	while (std::getline(inFile, line))
+	{
+	}
 
 	// add to store and other variables
 	Store store1 = Store();
@@ -39,7 +48,7 @@ int main()
 	{
 		int random_customer = rand() * store1.num_customers();
 		Person person = store1.get_customer(random_customer);
-		// TODO: figure out how to add a person and randomize a [roduct for the transaction
+		// TODO: figure out how to add a person and randomize a product for the transaction
 	}
 
 	// print store info at the end (with transactions)
@@ -49,4 +58,5 @@ int main()
 			 << endl;
 
 	inFile.close();
+	return 0;
 }
