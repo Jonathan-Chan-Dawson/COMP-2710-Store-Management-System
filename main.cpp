@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> //start of main.cpp
 #include <fstream>
 #include <string>
 #include <cstdlib>
@@ -17,23 +17,157 @@ using std::ifstream;
 
 int main()
 {
+	// spawn in store 1
+	Store store1 = Store();
 
 	// import from text files
-	ifstream inFile("credit_card.txt");
-	if (!inFile)
+	std::string line = "";
+	ifstream inFile("people.txt");
+
+	if (inFile) // if it doesn't exist we weep
 	{
-		cout << "Error: In-File is Not Available!" << endl;
+		std::getline(inFile, line);
+
+		int m = std::stoi(line);
+		Person new_person;	 // the person
+		address new_address; // the coordinates
+
+		for (int i = 0; i < m; i++)
+		{
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_person.name(line);
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_person.phone(line);
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_address.address_line1 = line;
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_address.city = line;
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_address.state = line;
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_address.zip = line;
+
+			new_person.person_address(new_address);
+			store1.add_customer(new_person);
+		}
+
+		inFile.close();
+	}
+	else
+	{
+		cout << "Error: People is Not Available!" << endl;
 		return -1;
 	}
-	// TODO: Finish Adding the Products. This may just be wrong, lmk if i did it wrong. or right. 1:28 PM eastern time.
-	std::string line;
-	while (std::getline(inFile, line))
+
+	std::string line = "";
+	ifstream inFile("credit_card.txt");
+
+	if (inFile)
 	{
+		std::getline(inFile, line);
+
+		int m = std::stoi(line);
+
+		for (int i = 0; i < m; i++)
+		{
+			credit_card new_card;
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			string card_owner = line;
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_card.cc_number = std::stoi(line);
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_card.current_balance = std::stoi(line);
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_card.limit = std::stoi(line);
+
+			Person temp_person = Person();
+			temp_person.name(card_owner);
+
+			int j = store1.find_customer(temp_person);
+
+			if (j != -1 && j < 100)
+			{
+				Person customer = store1.get_customer(j);
+				customer.person_credit_card(new_card);
+				store1.update_customer(j, customer);
+			}
+		}
+
+		inFile.close();
+	}
+	else
+	{
+		cout << "Error: Credit Card is Not Available!" << endl;
+		return -1; // rage quit
 	}
 
-	// add to store and other variables
-	Store store1 = Store();
-	// TODO: Add the products into the store
+	std::string line = "";
+	ifstream inFile("products.txt");
+
+	if (inFile)
+	{
+		std::getline(inFile, line);
+
+		int m = std::stoi(line);
+
+		for (int i = 0; i < m; i++)
+		{
+			product new_product;
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_product.name = line;
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_product.description = line;
+
+			std::getline(inFile, line);
+			while (line == "")
+				std::getline(inFile, line);
+			new_product.price = std::stoi(line);
+
+			store1.add_product(new_product);
+		}
+
+		inFile.close();
+	}
+	else
+	{
+		cout << "Error: Credit Card is Not Available!" << endl;
+		return -1; // rage quit
+	}
 
 	// print store info after you finish importing info
 	// from text files and add them to your store (no transactions yet!)
@@ -47,8 +181,13 @@ int main()
 	for (int i = 0; i < randomly_generated_transactions_count; i++)
 	{
 		int random_customer = rand() * store1.num_customers();
-		Person person = store1.get_customer(random_customer);
-		// TODO: figure out how to add a person and randomize a product for the transaction
+		int random_product = rand() * store1.num_products();
+		int random_amount = rand() * 5; // 5 was chosen.
+
+		Person person = store1.get_customer(random_customer); // exhibit a
+		product product = store1.get_product(random_product); // exhibit b
+
+		store1.make_purchase(person, product, random_amount);
 	}
 
 	// print store info at the end (with transactions)
