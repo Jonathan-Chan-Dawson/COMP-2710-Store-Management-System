@@ -94,12 +94,12 @@ int main()
 			std::getline(inFile_2, line);
 			while (line == "")
 				std::getline(inFile_2, line);
-			new_card.current_balance = std::stod(line);
+			new_card.limit = std::stod(line);
 
 			std::getline(inFile_2, line);
 			while (line == "")
 				std::getline(inFile_2, line);
-			new_card.limit = std::stod(line);
+			new_card.current_balance = std::stod(line);
 
 			Person temp_person = Person();
 			temp_person.name(card_owner);
@@ -167,17 +167,26 @@ int main()
 			 << endl;
 
 	// make random number of random transactions
-	int randomly_generated_transactions_count = rand() * 90 + 10;
-	for (int i = 0; i < randomly_generated_transactions_count; i++)
+	int randomly_generated_transactions_count = rand() % 91 + 10;
+	if (store1.num_customers() > 0 && store1.num_products() > 0)
 	{
-		int random_customer = rand() * store1.num_customers();
-		int random_product = rand() * store1.num_products();
-		int random_amount = rand() * 5; // 5 was the chosen one.
+		for (int i = 0; i < randomly_generated_transactions_count; i++)
+		{
+			int random_customer = rand() % store1.num_customers();
+			int random_product = rand() % store1.num_products();
+			int random_amount = rand() % 5 + 1; // 5 was the chosen one.
 
-		Person person = store1.get_customer(random_customer); // exhibit a
-		product product = store1.get_product(random_product); // exhibit b
+			Person person = store1.get_customer(random_customer); // exhibit a
+			product product = store1.get_product(random_product); // exhibit b
 
-		store1.make_purchase(person, product, random_amount);
+			bool success = store1.make_purchase(person, product, random_amount);
+			cout << "Transaction " << i << " success: " << success << "\n";
+		}
+	}
+	else
+	{
+		cout << "Error: Store has no customers or products!\n";
+		return -1;
 	}
 
 	// print store info at the end (with transactions)
