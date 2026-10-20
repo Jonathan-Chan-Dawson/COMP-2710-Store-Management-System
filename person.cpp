@@ -68,6 +68,6 @@ string Person::person_info()
       << "Name: " << name_ << ", "
       << "Phone: " << phone_ << ", "
       << "Address: (" << person_address_.address_info() << "), "
-      << "Credit Card: (" << person_credit_card_.credit_card_info() + ")";
+      << "Credit Card: (" << person_credit_card_.credit_card_info() << ")";
   return out.str();
 }

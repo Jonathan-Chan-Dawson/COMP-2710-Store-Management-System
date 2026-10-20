@@ -2,6 +2,7 @@
 // The Store Stores Customers and Products, and Manages Transactions
 #include "store.h"
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -52,8 +53,6 @@ bool Store::add_customer(Person customer)
   }
   else
   {
-    std::cout << customer.person_info() << "added " << std::endl;
-
     customers_[num_customers_] = customer;
     num_customers(num_customers_ + 1);
     return true; // added
@@ -148,9 +147,10 @@ std::string Store::product_info()
   for (int i = 0; i < num_products_; i++)
   {
     std::string str_temp = get_product(i).description;
-    str += "\n\t" + str_temp;
+    str += "\n" + str_temp;
   }
   str += "\n";
+  str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());
   return str;
 }
 
@@ -162,9 +162,10 @@ string Store::transaction_info()
   for (int i = 0; i < num_transactions_; i++)
   {
     std::string str_temp = get_transaction(i).transaction_info();
-    str += "\n\t" + str_temp;
+    str += "\n" + str_temp;
   }
   str += "\n";
+  str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());
   return str;
 }
 
@@ -173,10 +174,11 @@ string Store::customer_info()
   std::string str = "\nCUSTOMERS INFO: \n";
   for (int i = 0; i < num_customers_; i++)
   {
-    std::string str_temp = get_transaction(i).transaction_info();
-    str += "\n\t" + str_temp;
+    std::string str_temp = get_customer(i).person_info();
+    str += "\n" + str_temp;
   }
   str += "\n";
+  str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());
   return str;
 }
 

@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
+#include <algorithm>
 
 #include "address.h"
 #include "credit_card.h"
@@ -29,39 +30,31 @@ int main()
 		std::getline(inFile_1, line);
 
 		int m = std::stoi(line);
-		Person new_person;	 // the person
-		address new_address; // the coordinates
 
 		for (int i = 0; i < m; i++)
 		{
+			Person new_person;	 // the person
+			address new_address; // the coordinates
+
 			std::getline(inFile_1, line);
-			while (line == "")
-				std::getline(inFile_1, line);
 			new_person.name(line);
 
 			std::getline(inFile_1, line);
-			while (line == "")
-				std::getline(inFile_1, line);
 			new_person.phone(line);
 
 			std::getline(inFile_1, line);
-			while (line == "")
-				std::getline(inFile_1, line);
 			new_address.address_line1 = line;
 
 			std::getline(inFile_1, line);
-			while (line == "")
-				std::getline(inFile_1, line);
+			new_address.address_line2 = line;
+
+			std::getline(inFile_1, line);
 			new_address.city = line;
 
 			std::getline(inFile_1, line);
-			while (line == "")
-				std::getline(inFile_1, line);
 			new_address.state = line;
 
 			std::getline(inFile_1, line);
-			while (line == "")
-				std::getline(inFile_1, line);
 			new_address.zip = line;
 
 			new_person.person_address(new_address);
@@ -101,19 +94,18 @@ int main()
 			std::getline(inFile_2, line);
 			while (line == "")
 				std::getline(inFile_2, line);
-			new_card.current_balance = std::stoi(line);
+			new_card.current_balance = std::stod(line);
 
 			std::getline(inFile_2, line);
 			while (line == "")
 				std::getline(inFile_2, line);
-			new_card.limit = std::stoi(line);
+			new_card.limit = std::stod(line);
 
 			Person temp_person = Person();
 			temp_person.name(card_owner);
-
 			int j = store1.find_customer(temp_person);
 
-			if (j != -1 && j < 100)
+			if (j > -1 && j < 100)
 			{
 				Person customer = store1.get_customer(j);
 				customer.person_credit_card(new_card);
@@ -196,3 +188,5 @@ int main()
 
 	return 0;
 }
+// if assembly was streamlined, made practical, and modernize it..it..thats holy c
+// jonathan started questioning his life choices, his bloodline, and his faith in the entire 'c' language bloodline
