@@ -22,11 +22,11 @@ int main()
 
 	// import from text files
 	std::string line = "";
-	ifstream inFile("people.txt");
+	ifstream inFile_1("people.txt");
 
-	if (inFile) // if it doesn't exist we weep
+	if (inFile_1) // if it doesn't exist we weep
 	{
-		std::getline(inFile, line);
+		std::getline(inFile_1, line);
 
 		int m = std::stoi(line);
 		Person new_person;	 // the person
@@ -34,41 +34,41 @@ int main()
 
 		for (int i = 0; i < m; i++)
 		{
-			std::getline(inFile, line);
+			std::getline(inFile_1, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_1, line);
 			new_person.name(line);
 
-			std::getline(inFile, line);
+			std::getline(inFile_1, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_1, line);
 			new_person.phone(line);
 
-			std::getline(inFile, line);
+			std::getline(inFile_1, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_1, line);
 			new_address.address_line1 = line;
 
-			std::getline(inFile, line);
+			std::getline(inFile_1, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_1, line);
 			new_address.city = line;
 
-			std::getline(inFile, line);
+			std::getline(inFile_1, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_1, line);
 			new_address.state = line;
 
-			std::getline(inFile, line);
+			std::getline(inFile_1, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_1, line);
 			new_address.zip = line;
 
 			new_person.person_address(new_address);
 			store1.add_customer(new_person);
 		}
 
-		inFile.close();
+		inFile_1.close();
 	}
 	else
 	{
@@ -76,12 +76,11 @@ int main()
 		return -1;
 	}
 
-	std::string line = "";
-	ifstream inFile("credit_card.txt");
+	ifstream inFile_2("credit_card.txt");
 
-	if (inFile)
+	if (inFile_2)
 	{
-		std::getline(inFile, line);
+		std::getline(inFile_2, line);
 
 		int m = std::stoi(line);
 
@@ -89,24 +88,24 @@ int main()
 		{
 			credit_card new_card;
 
-			std::getline(inFile, line);
+			std::getline(inFile_2, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_2, line);
 			string card_owner = line;
 
-			std::getline(inFile, line);
+			std::getline(inFile_2, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_2, line);
 			new_card.cc_number = std::stoi(line);
 
-			std::getline(inFile, line);
+			std::getline(inFile_2, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_2, line);
 			new_card.current_balance = std::stoi(line);
 
-			std::getline(inFile, line);
+			std::getline(inFile_2, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_2, line);
 			new_card.limit = std::stoi(line);
 
 			Person temp_person = Person();
@@ -122,7 +121,7 @@ int main()
 			}
 		}
 
-		inFile.close();
+		inFile_2.close();
 	}
 	else
 	{
@@ -130,12 +129,11 @@ int main()
 		return -1; // rage quit
 	}
 
-	std::string line = "";
-	ifstream inFile("products.txt");
+	ifstream inFile_3("products.txt");
 
-	if (inFile)
+	if (inFile_3)
 	{
-		std::getline(inFile, line);
+		std::getline(inFile_3, line);
 
 		int m = std::stoi(line);
 
@@ -143,25 +141,25 @@ int main()
 		{
 			product new_product;
 
-			std::getline(inFile, line);
+			std::getline(inFile_3, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_3, line);
 			new_product.name = line;
 
-			std::getline(inFile, line);
+			std::getline(inFile_3, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_3, line);
 			new_product.description = line;
 
-			std::getline(inFile, line);
+			std::getline(inFile_3, line);
 			while (line == "")
-				std::getline(inFile, line);
+				std::getline(inFile_3, line);
 			new_product.price = std::stoi(line);
 
 			store1.add_product(new_product);
 		}
 
-		inFile.close();
+		inFile_3.close();
 	}
 	else
 	{
@@ -196,6 +194,5 @@ int main()
 	cout << store1.store_info() << endl
 			 << endl;
 
-	inFile.close();
 	return 0;
 }

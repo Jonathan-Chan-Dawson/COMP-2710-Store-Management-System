@@ -1,8 +1,10 @@
 // code for person class here
 #include "person.h"
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 
-using std::string;
+using namespace std;
 
 // Get Set Methods are Below!
 
@@ -60,5 +62,12 @@ credit_card Person::person_credit_card()
 
 string Person::person_info()
 {
-  return "PERSON Name: " + name_ + " | Phone: " + phone_ + " \n\tAddress: (" + person_address_.address_info() + ") \n\tCredit Card: (" + person_credit_card_.credit_card_info() + ")\n\n";
+  std::ostringstream out;
+  out << std::fixed << std::setprecision(2);
+  out << "PERSON" << "\n"
+      << "Name: " << name_ << "\n"
+      << "Phone: " << phone_ << "\n"
+      << "Address: (" << person_address_.address_info() << ") \n"
+      << "Credit Card: (" << person_credit_card_.credit_card_info() + ") \n";
+  return out.str();
 }
