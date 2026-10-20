@@ -72,8 +72,8 @@ int main()
 	}
 	else
 	{
-		cout << "Error: People is Not Available!" << endl;
-		return -1;
+		cout << "Error: People is Not Available!" << endl; // the humans escaped
+		return -1;																				 // crash out
 	}
 
 	ifstream inFile_2("credit_card.txt");
@@ -169,7 +169,7 @@ int main()
 
 	// print store info after you finish importing info
 	// from text files and add them to your store (no transactions yet!)
-	cout << "Store info: " << endl
+	cout << "Store Info (Before Scamming): " << endl
 			 << endl;
 	cout << store1.store_info() << endl
 			 << endl;
@@ -180,7 +180,7 @@ int main()
 	{
 		int random_customer = rand() * store1.num_customers();
 		int random_product = rand() * store1.num_products();
-		int random_amount = rand() * 5; // 5 was chosen.
+		int random_amount = rand() * 5; // 5 was the chosen one.
 
 		Person person = store1.get_customer(random_customer); // exhibit a
 		product product = store1.get_product(random_product); // exhibit b
@@ -189,7 +189,7 @@ int main()
 	}
 
 	// print store info at the end (with transactions)
-	cout << "Store info: " << endl
+	cout << "\n\n\n\nStore Info (After Scamming): " << endl
 			 << endl;
 	cout << store1.store_info() << endl
 			 << endl;

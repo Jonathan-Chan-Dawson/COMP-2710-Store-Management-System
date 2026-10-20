@@ -1,6 +1,7 @@
 // code for store class here
 // The Store Stores Customers and Products, and Manages Transactions
 #include "store.h"
+#include <iostream>
 
 using namespace std;
 
@@ -51,6 +52,8 @@ bool Store::add_customer(Person customer)
   }
   else
   {
+    std::cout << customer.person_info() << "added " << std::endl;
+
     customers_[num_customers_] = customer;
     num_customers(num_customers_ + 1);
     return true; // added

@@ -9,7 +9,7 @@ bool credit_card::make_purchase(double purchase_amount)
 {
 	if (purchase_amount <= 0 || current_balance + purchase_amount > limit)
 	{
-    	return false;
+		return false;
 	}
 	current_balance += purchase_amount;
 	return true;
@@ -29,8 +29,8 @@ std::string credit_card::credit_card_info()
 {
 	std::ostringstream out;
 	out << std::fixed << std::setprecision(2);
-	out << "Credit card number: " << cc_number << "\n"
-    	<< "Credit Card Limit: $" << limit << "\n"
-    	<< "Current Balance: $" << current_balance << "\n";
+	out << "number: " << cc_number << ", "
+			<< "limit: $" << limit << ", "
+			<< "balance: $" << current_balance << "";
 	return out.str();
 }
