@@ -180,8 +180,8 @@ int main()
 			product product = store1.get_product(random_product); // exhibit b
 
 			bool success = store1.make_purchase(person, product, random_amount);
-			cout << "Transaction " << i << " success: " << success << " \n"
-					 << store1.get_transaction(i).transaction_info() << "\n";
+			cout << "Transaction " << i << " Success: " << success << " \n"
+					 << store1.get_transaction(store1.num_transactions() - 1).transaction_info() << "\n";
 		}
 	}
 	else
