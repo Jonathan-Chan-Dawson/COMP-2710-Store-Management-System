@@ -161,7 +161,7 @@ int main()
 
 	// print store info after you finish importing info
 	// from text files and add them to your store (no transactions yet!)
-	cout << "Store Info (Before Scamming): " << endl
+	cout << "Store Info: " << endl
 			 << endl;
 	cout << store1.store_info() << endl
 			 << endl;
@@ -180,7 +180,8 @@ int main()
 			product product = store1.get_product(random_product); // exhibit b
 
 			bool success = store1.make_purchase(person, product, random_amount);
-			cout << "Transaction " << i << " success: " << success << "\n";
+			cout << "Transaction " << i << " success: " << success << " \n"
+					 << store1.get_transaction(i).transaction_info() << "\n";
 		}
 	}
 	else
@@ -190,7 +191,7 @@ int main()
 	}
 
 	// print store info at the end (with transactions)
-	cout << "\n\n\n\nStore Info (After Scamming): " << endl
+	cout << "\n\n\n\nStore Info: " << endl
 			 << endl;
 	cout << store1.store_info() << endl
 			 << endl;

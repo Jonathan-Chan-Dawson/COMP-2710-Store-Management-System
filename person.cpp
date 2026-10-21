@@ -65,9 +65,9 @@ string Person::person_info()
   std::ostringstream out;
   out << std::fixed << std::setprecision(2);
   out << "PERSON" << " | "
-      << "Name: " << name_ << ", "
+      << "Name: " << name_ << ", \n"
       << "Phone: " << phone_ << ", "
-      << "Address: (" << person_address_.address_info() << "), "
+      << "Address: (" << person_address_.address_info() << "), \n"
       << "Credit Card: (" << person_credit_card_.credit_card_info() << ")";
   return out.str();
 }

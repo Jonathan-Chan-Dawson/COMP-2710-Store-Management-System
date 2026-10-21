@@ -157,7 +157,7 @@ std::string Store::product_info()
   for (int i = 0; i < num_products_; i++)
   {
     std::string str_temp = get_product(i).product_info();
-    str += "\n" + str_temp;
+    str += "\n\n" + str_temp;
   }
   str += "\n";
   str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());
@@ -172,7 +172,7 @@ string Store::transaction_info()
   for (int i = 0; i < num_transactions_; i++)
   {
     std::string str_temp = get_transaction(i).transaction_info();
-    str += "\n" + str_temp;
+    str += "\n\n" + str_temp;
   }
   str += "\n";
   str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());
@@ -185,7 +185,7 @@ string Store::customer_info()
   for (int i = 0; i < num_customers_; i++)
   {
     std::string str_temp = get_customer(i).person_info();
-    str += "\n" + str_temp;
+    str += "\n\n" + str_temp;
   }
   str += "\n";
   str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());
