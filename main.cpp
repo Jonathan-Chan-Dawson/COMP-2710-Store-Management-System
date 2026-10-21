@@ -146,7 +146,7 @@ int main()
 			std::getline(inFile_3, line);
 			while (line == "")
 				std::getline(inFile_3, line);
-			new_product.price = std::stoi(line);
+			new_product.price = std::stod(line);
 
 			store1.add_product(new_product);
 		}

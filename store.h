@@ -2,6 +2,8 @@
 #include "transaction.h"
 #include "person.h"
 
+using namespace std;
+
 #ifndef STORE_H
 #define STORE_H
 

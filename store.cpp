@@ -7,6 +7,7 @@
 using namespace std;
 
 Store::Store()
+    : num_customers_(0), num_products_(0), num_transactions_(0)
 {
 }
 
@@ -123,9 +124,18 @@ transaction Store::get_transaction(int index)
 // adds a person if not already added
 bool Store::make_purchase(Person person, product product, int quantity)
 {
-  bool purchase_success = person.person_credit_card().make_purchase(product.price * quantity);
+  if (num_transactions_ >= 100) // never > 100
+  {
+    return false;
+  }
+
+  credit_card card = person.person_credit_card();
+  bool purchase_success = card.make_purchase(product.price * quantity);
+
   if (purchase_success)
   {
+    person.person_credit_card(card);
+
     transaction new_transaction;
     new_transaction.customer = person;
     new_transaction.purchased_item = product;
@@ -146,7 +156,7 @@ std::string Store::product_info()
   std::string str = "\nPRODUCT INFO: \n";
   for (int i = 0; i < num_products_; i++)
   {
-    std::string str_temp = get_product(i).description;
+    std::string str_temp = get_product(i).product_info();
     str += "\n" + str_temp;
   }
   str += "\n";
@@ -202,7 +212,10 @@ string Store::purchase_history(Person customer)
     if (transactions_[i].customer.name() == customer.name())
       str += transactions_[i].transaction_info() + ", ";
   }
-  str.erase(str.length() - 2);
+
+  if (str.length() > 2)
+    str.erase(str.length() - 2);
+
   return str; // <= no customer found
 }
 
